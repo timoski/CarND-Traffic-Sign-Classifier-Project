@@ -13056,6 +13056,25 @@ ul.typeahead-list  > li > a.pull-right {
 .ansi-bold { font-weight: bold; }
 
     </style>
+<style type="text/css">
+    body[data-notebook-name] > #header #header-container:not(.show-panel), /* body has data-notebook-name attribute when 
+a notebook is open. this rule won't be applied when the notebook is not open (in 404 view for example) */
+body[data-notebook-name] #menubar-container #maintoolbar:not(.show-panel),
+body[data-notebook-name] #menubar-container ul.navbar-nav:not(.show-panel) {
+  display: none;
+}
+
+#menubar.only-panel #menus.navbar-default {
+    background: #fff;
+    border-color: #fff;
+}
+
+.toolbar.with-statusbar{
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+
+    </style>
 
 
 <style type="text/css">
@@ -13214,6 +13233,7 @@ div#notebook {
 <span class="n">n_classes</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of training examples =&quot;</span><span class="p">,</span> <span class="n">n_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of validation examples =&quot;</span><span class="p">,</span> <span class="n">n_validation</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of testing examples =&quot;</span><span class="p">,</span> <span class="n">n_test</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image data shape =&quot;</span><span class="p">,</span> <span class="n">image_shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of classes =&quot;</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
@@ -13235,12 +13255,52 @@ div#notebook {
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Number of training examples = 34799
+Number of validation examples = 4410
 Number of testing examples = 12630
 Image data shape = (32, 32, 3)
 Number of classes = 42
 (34799,)
 </pre>
 </div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hist</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_classes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number images&quot;</span><span class="p">)</span>
+<span class="c1">#plt.show()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;hist.jpg&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
 </div>
 
 </div>
@@ -13294,7 +13354,7 @@ Number of classes = 42
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f9b039e6e48&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7fb45dac8e10&gt;</pre>
 </div>
 
 </div>
@@ -13405,7 +13465,7 @@ Number of classes = 42
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Define your architecture here.</span>
@@ -13483,7 +13543,7 @@ Number of classes = 42
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Train,-Validate-and-Test-the-Model">Train, Validate and Test the Model<a class="anchor-link" href="#Train,-Validate-and-Test-the-Model">&#182;</a></h3>
+<h3 id="Train-and-Validate-the-Model">Train and Validate the Model<a class="anchor-link" href="#Train-and-Validate-the-Model">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13498,7 +13558,7 @@ sets imply underfitting. A high accuracy on the training set but low accuracy on
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Train your model here.</span>
@@ -13577,134 +13637,134 @@ sets imply underfitting. A high accuracy on the training set but low accuracy on
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Tensor(&#34;one_hot_8:0&#34;, dtype=float32)
+<pre>Tensor(&#34;one_hot:0&#34;, dtype=float32)
 Training...
 
 EPOCH 1 ...
-Validation Accuracy = 0.130
+Validation Accuracy = 0.125
 
 EPOCH 2 ...
-Validation Accuracy = 0.229
+Validation Accuracy = 0.171
 
 EPOCH 3 ...
-Validation Accuracy = 0.323
+Validation Accuracy = 0.237
 
 EPOCH 4 ...
-Validation Accuracy = 0.382
+Validation Accuracy = 0.300
 
 EPOCH 5 ...
-Validation Accuracy = 0.444
+Validation Accuracy = 0.355
 
 EPOCH 6 ...
-Validation Accuracy = 0.486
+Validation Accuracy = 0.381
 
 EPOCH 7 ...
-Validation Accuracy = 0.519
+Validation Accuracy = 0.424
 
 EPOCH 8 ...
-Validation Accuracy = 0.567
+Validation Accuracy = 0.469
 
 EPOCH 9 ...
-Validation Accuracy = 0.613
+Validation Accuracy = 0.491
 
 EPOCH 10 ...
-Validation Accuracy = 0.649
+Validation Accuracy = 0.554
 
 EPOCH 11 ...
-Validation Accuracy = 0.695
+Validation Accuracy = 0.585
 
 EPOCH 12 ...
-Validation Accuracy = 0.704
+Validation Accuracy = 0.638
 
 EPOCH 13 ...
-Validation Accuracy = 0.734
+Validation Accuracy = 0.680
 
 EPOCH 14 ...
-Validation Accuracy = 0.761
+Validation Accuracy = 0.710
 
 EPOCH 15 ...
-Validation Accuracy = 0.765
+Validation Accuracy = 0.739
 
 EPOCH 16 ...
-Validation Accuracy = 0.780
+Validation Accuracy = 0.782
 
 EPOCH 17 ...
-Validation Accuracy = 0.787
+Validation Accuracy = 0.810
 
 EPOCH 18 ...
-Validation Accuracy = 0.813
+Validation Accuracy = 0.827
 
 EPOCH 19 ...
-Validation Accuracy = 0.820
+Validation Accuracy = 0.839
 
 EPOCH 20 ...
-Validation Accuracy = 0.826
+Validation Accuracy = 0.845
 
 EPOCH 21 ...
-Validation Accuracy = 0.834
+Validation Accuracy = 0.859
 
 EPOCH 22 ...
-Validation Accuracy = 0.846
+Validation Accuracy = 0.872
 
 EPOCH 23 ...
-Validation Accuracy = 0.861
+Validation Accuracy = 0.870
 
 EPOCH 24 ...
-Validation Accuracy = 0.861
+Validation Accuracy = 0.876
 
 EPOCH 25 ...
-Validation Accuracy = 0.866
+Validation Accuracy = 0.885
 
 EPOCH 26 ...
-Validation Accuracy = 0.866
-
-EPOCH 27 ...
-Validation Accuracy = 0.881
-
-EPOCH 28 ...
-Validation Accuracy = 0.888
-
-EPOCH 29 ...
-Validation Accuracy = 0.882
-
-EPOCH 30 ...
-Validation Accuracy = 0.884
-
-EPOCH 31 ...
 Validation Accuracy = 0.890
 
+EPOCH 27 ...
+Validation Accuracy = 0.885
+
+EPOCH 28 ...
+Validation Accuracy = 0.893
+
+EPOCH 29 ...
+Validation Accuracy = 0.886
+
+EPOCH 30 ...
+Validation Accuracy = 0.893
+
+EPOCH 31 ...
+Validation Accuracy = 0.901
+
 EPOCH 32 ...
-Validation Accuracy = 0.891
+Validation Accuracy = 0.908
 
 EPOCH 33 ...
-Validation Accuracy = 0.907
+Validation Accuracy = 0.905
 
 EPOCH 34 ...
 Validation Accuracy = 0.906
 
 EPOCH 35 ...
-Validation Accuracy = 0.903
+Validation Accuracy = 0.916
 
 EPOCH 36 ...
-Validation Accuracy = 0.908
+Validation Accuracy = 0.922
 
 EPOCH 37 ...
 Validation Accuracy = 0.908
 
 EPOCH 38 ...
-Validation Accuracy = 0.904
+Validation Accuracy = 0.923
 
 EPOCH 39 ...
-Validation Accuracy = 0.922
+Validation Accuracy = 0.920
 
 EPOCH 40 ...
-Validation Accuracy = 0.918
+Validation Accuracy = 0.913
 
 EPOCH 41 ...
-Validation Accuracy = 0.917
+Validation Accuracy = 0.926
 
 EPOCH 42 ...
-Validation Accuracy = 0.919
+Validation Accuracy = 0.920
 
 EPOCH 43 ...
 Validation Accuracy = 0.921
@@ -13713,24 +13773,70 @@ EPOCH 44 ...
 Validation Accuracy = 0.924
 
 EPOCH 45 ...
-Validation Accuracy = 0.914
+Validation Accuracy = 0.928
 
 EPOCH 46 ...
-Validation Accuracy = 0.926
-
-EPOCH 47 ...
-Validation Accuracy = 0.924
-
-EPOCH 48 ...
 Validation Accuracy = 0.922
 
+EPOCH 47 ...
+Validation Accuracy = 0.927
+
+EPOCH 48 ...
+Validation Accuracy = 0.921
+
 EPOCH 49 ...
-Validation Accuracy = 0.929
+Validation Accuracy = 0.932
 
 EPOCH 50 ...
-Validation Accuracy = 0.930
+Validation Accuracy = 0.921
 
 Model saved
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-the-Model">Test the Model<a class="anchor-link" href="#Test-the-Model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+
+    <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Accuracy = </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_accuracy</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>INFO:tensorflow:Restoring parameters from ./lenet
+Test Accuracy = 0.877
 </pre>
 </div>
 </div>
@@ -13758,18 +13864,18 @@ Model saved
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Load the images and plot them here.</span>
 <span class="c1">### Feel free to use as many code cells as needed.</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span>
     <span class="n">p</span><span class="o">=</span><span class="s1">&#39;../data/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span>
+    <span class="n">img</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_CUBIC</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">res</span><span class="o">=</span><span class="p">(</span><span class="n">res</span><span class="o">-</span><span class="mf">128.0</span><span class="p">)</span><span class="o">/</span><span class="mf">128.0</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-    <span class="n">img</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
         <span class="n">session</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
         <span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">latest_checkpoint</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
@@ -13796,7 +13902,7 @@ Model saved
 <pre>../data/1.png
 (1, 32, 32, 3)
 INFO:tensorflow:Restoring parameters from ./lenet
-Prediction: 38
+Prediction: 5
 </pre>
 </div>
 </div>
@@ -13825,7 +13931,7 @@ Prediction: 38
 <pre>../data/2.png
 (1, 32, 32, 3)
 INFO:tensorflow:Restoring parameters from ./lenet
-Prediction: 25
+Prediction: 5
 </pre>
 </div>
 </div>
@@ -13854,7 +13960,7 @@ Prediction: 25
 <pre>../data/3.png
 (1, 32, 32, 3)
 INFO:tensorflow:Restoring parameters from ./lenet
-Prediction: 38
+Prediction: 5
 </pre>
 </div>
 </div>
@@ -13883,7 +13989,7 @@ Prediction: 38
 <pre>../data/4.png
 (1, 32, 32, 3)
 INFO:tensorflow:Restoring parameters from ./lenet
-Prediction: 38
+Prediction: 5
 </pre>
 </div>
 </div>
@@ -13912,7 +14018,7 @@ Prediction: 38
 <pre>../data/5.png
 (1, 32, 32, 3)
 INFO:tensorflow:Restoring parameters from ./lenet
-Prediction: 20
+Prediction: 5
 </pre>
 </div>
 </div>
