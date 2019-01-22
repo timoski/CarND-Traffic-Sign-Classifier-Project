@@ -92,9 +92,9 @@ To train the model, I used 50 epoches, a batch size of 128 and a learning rate o
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of 93.4 %
-* validation set accuracy of 93 % 
-* test set accuracy of 87.7 %
+* training set accuracy of 99.7 %
+* validation set accuracy of 94.6 % 
+* test set accuracy of 90.2 %
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -124,11 +124,11 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Road work     		| Keep right   									| 
-| Priority road     			| Road work 										|
-| Turn left ahead					| Keep right											|
+| Road work     		| Road work   									| 
+| Priority road     			| Priority road 										|
+| Turn left ahead					| Turn left ahead											|
 | 60 km/h	      		| Keep right				 				|
-| Yield			| Dangerous curve to the right      							|
+| Yield			| Keep right      							|
 
 
 The model was not able to detect any traffic sign correct. There seems to be something wrong, but I wasn't able to find out what it is.
