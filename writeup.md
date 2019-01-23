@@ -94,9 +94,9 @@ To train the model, I used 20 epoches, a batch size of 128 and a learning rate o
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy 1st run: 99.7 % second run: 98.5 %
-* validation set accuracy 1st run: 94.6 % second second: 93.3 %
-* test set accuracy 1st run: 90.2 %, second run: 86.4 %
+* training set accuracy 1st run: 99.7 % second run: 99.4 %
+* validation set accuracy 1st run: 94.6 % second second: 94.3 %
+* test set accuracy 1st run: 90.2 %, second run: 89.0 %
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
