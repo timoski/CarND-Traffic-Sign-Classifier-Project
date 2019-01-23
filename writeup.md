@@ -56,7 +56,9 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 ### Design and Test a Model Architecture
 
 
-As a first step, I decided to normalize the images by subtracting 128 from all pixels and dividing all pixels by 128. 
+As a first step, I decided to normalize the images by subtracting 128 from all pixels and dividing all pixels by 128.
+In addition I used Image Augementation as mentioned as recommondation from the Review. For augmentation I use a function I found online: https://github.com/vxy10/ImageAugmentation/blob/master/img_transform_NB.ipynb
+The transform_image function uses Affine Transformation to rotate the image. Therefore the the classifier gets more robust to overfitting.
 
 
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
@@ -87,7 +89,7 @@ My final model consisted of the following layers:
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used 50 epoches, a batch size of 128 and a learning rate of 0.001.
+To train the model, I used 50 epoches, a batch size of 128 and a learning rate of 0.01.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -100,10 +102,10 @@ If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
 First I started with the LeNet architecture. Therefore I had to convert my images to grayscale. I used this architecture because I think it is a good starting point.
 * What were some problems with the initial architecture?
-I tried to tune the parameters, but the results were unsatisfing and the model seemed to overfit.
+I tried to tune the parameters, but the results were unsatisfing and the model seemed to overfit. I added image augmentation to get more robust.
 * How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
 Later I changed the LeNet Architecture to accept color images as the color is an important information for detecting the correct traffic sign.
-In addition I added dropouts to get more robust against overfitting.
+In addition I added dropouts and image augmentation to get more robust against overfitting.
 * Which parameters were tuned? How were they adjusted and why?
 I reduced the learning rate to avoid early overfitting and increased the number of epoches to get better results.
 
@@ -115,8 +117,6 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text][image4] ![alt text][image5] ![alt text][image6] 
 ![alt text][image7] ![alt text][image8]
-
-The first image might be difficult to classify because ...
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -131,7 +131,7 @@ Here are the results of the prediction:
 | Yield			| Keep right      							|
 
 
-The model was not able to detect any traffic sign correct. There seems to be something wrong, but I wasn't able to find out what it is.
+The model was able to detect 4 out of 5 traffic sign correct. The Yield traffic sign was not recognized correct. I think it is hard to recognize because the contrast is very low and the image is dark.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
