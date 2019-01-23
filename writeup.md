@@ -135,8 +135,8 @@ The model was able to detect 5 out of 5 traffic sign correct.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 The model is very certain about each traffic sign:
-| Image			        |     Softmax values	        					| 
-|:---------------------:|:---------------------------------------------:| 
+| Image			        |     Softmax value	        					| 
+|:---------------------:|:---------------------------------------------------------------:| 
 | Road work     		| 11.36664581,   4.78788948,   3.16048265,   2.62394619, 2.30714035  									| 
 | Priority road     			| 4.54756832,   1.80329108,   1.65951753,   1.28115904, 1.11287177							|
 | Turn left ahead					| 32.20824051,  24.26448631,  22.84521866,  18.11581421,  17.4197197									|
